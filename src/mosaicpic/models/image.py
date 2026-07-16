@@ -131,7 +131,7 @@ class Image:
             NDArray[np.uint8]: The RGB image as a numpy array of shape
                 (height, width, 3).
         """
-        return self._array.copy()  # type: ignore[no-any-return]
+        return self._array.copy()
 
     def get_cell(self, x: int, y: int) -> Cell:
         """Get the Cell at a specific coordinate.

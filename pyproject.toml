@@ -89,8 +89,15 @@ ignore = [
 known-first-party = ["mosaicpic"]
 
 # Mypy configuration (type checker)
+# python_version is pinned to the CI runner's Python (3.12) rather than the
+# package's minimum supported version (3.10). Third-party stubs (e.g. numpy's
+# __init__.pyi) increasingly use PEP 695 syntax that mypy can only parse when
+# targeting 3.12+, so pinning lower breaks type checking on unrelated stub
+# files. This only affects mypy's static analysis; `requires-python = ">=3.10"`
+# is unaffected, and py310/py311 compatibility is still enforced by Ruff's
+# "UP" (pyupgrade) rules and the multi-version test matrix in CI.
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.12"
 strict = true
 warn_return_any = true
 warn_unused_ignores = true
